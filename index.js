@@ -22,42 +22,46 @@ if(!db) {
    process.exit(1);
 }
 
+app.use('/hello', require('./routes/hello.js'));
+app.use('/params', require('./routes/params.js'));
+app.use('/wait', require('./routes/wait.js'));
+
 /**
  * Hello World functions below
  */
-app.get("/hello", (req, res) => {
-    res.send({
-        message: "Hello, you sent a GET request"
-    });
-});
+// app.get("/hello", (req, res) => {
+//     res.send({
+//         message: "Hello, you sent a GET request"
+//     });
+// });
 
-app.post("/hello", (req, res) => {
-    res.send({
-        message: "Hello, you sent a POST request"
-    });
-});
+// app.post("/hello", (req, res) => {
+//     res.send({
+//         message: "Hello, you sent a POST request"
+//     });
+// });
 
-app.get("/params", (req, res) => {
-    res.send({
-        //req.query is a reference to arguments in the url
-        message: "Hello, " + req.query['name'] + "!"
-    });
-});
+// app.get("/params", (req, res) => {
+//     res.send({
+//         //req.query is a reference to arguments in the url
+//         message: "Hello, " + req.query['name'] + "!"
+//     });
+// });
 
-app.post("/params", (req, res) => {
-    res.send({
-        //req.query is a reference to arguments in the POST body
-        message: "Hello, " + req.body['name'] + "! You sent a POST request"
-    });
-});
+// app.post("/params", (req, res) => {
+//     res.send({
+//         //req.query is a reference to arguments in the POST body
+//         message: "Hello, " + req.body['name'] + "! You sent a POST request"
+//     });
+// });
 
-app.get("/wait", (req, res) => {
-    setTimeout(() => {
-        res.send({
-            message: "Thanks for waiting"
-        });
-    }, 1000);
-});
+// app.get("/wait", (req, res) => {
+//     setTimeout(() => {
+//         res.send({
+//             message: "Thanks for waiting"
+//         });
+//     }, 1000);
+// });
 
 app.post("/demosql", (req, res) => {
     var name = req.body['name'];
