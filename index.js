@@ -22,8 +22,20 @@ if(!db) {
    process.exit(1);
 }
 
+/**
+ * Hello World functions below
+ */
+app.get("/hello", (req, res) => {
+    res.send({
+        message: "Hello, you sent a GET request"
+    });
+});
 
-
+app.post("/hello", (req, res) => {
+    res.send({
+        message: "Hello, you sent a POST request"
+    });
+});
 
 
 
