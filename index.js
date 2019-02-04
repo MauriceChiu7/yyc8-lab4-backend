@@ -59,6 +59,46 @@ app.get("/wait", (req, res) => {
     }, 1000);
 });
 
+app.post("/demosql", (req, res) => {
+    var name = req.body['name'];
+    if (name) {
+        db.none("INSERT INTO DEMO(Text) VALUES ($1)", name).then(() => {
+            // We successfully added the name, let the user know
+            res.send({
+                success:true
+            });
+        }).catch((err) => {
+            // Log the error
+            console.log(err);
+            res.send({
+                success:false, 
+                error:err
+            });           
+        })
+    } else {
+        res.send({
+            success:false, 
+            input:req.body,
+            error:"Mission required information"
+        });
+    }
+});
+
+app.get("/demosql", (req, res) => {
+    db.manyOrNone('SELECT Text FROM Demo').then((data) => {
+        res.send({
+            success:true,
+            names:data
+        });
+    }).catch((err) => {
+        console.log(err);
+        res.send({
+            success:false,
+            error:err
+        })
+    });
+});
+
 
 /*
  * Return HTML for the / end point. 
