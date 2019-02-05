@@ -9,22 +9,11 @@ const bodyParser = require("body-parser");
 //This allows parsing of the body of POST requests, that are encoded in JSON
 app.use(bodyParser.json());
 
-//pg-promise is a postgres library that uses javascript promises
-const pgp = require('pg-promise')();
-//We have to set ssl usage to true for Heroku to accept our connection
-pgp.pg.defaults.ssl = true;
-
-//Create connection to Heroku Database
-let db = pgp(process.env.DATABASE_URL);
-
-if(!db) {
-   console.log("SHAME! Follow the intructions and set your DATABASE_URL correctly");
-   process.exit(1);
-}
-
 app.use('/hello', require('./routes/hello.js'));
 app.use('/params', require('./routes/params.js'));
 app.use('/wait', require('./routes/wait.js'));
+app.use('/demosql', require('./routes/demosql.js'));
+app.use('/register', require('./routes/register.js'));
 
 /**
  * Hello World functions below
@@ -63,45 +52,45 @@ app.use('/wait', require('./routes/wait.js'));
 //     }, 1000);
 // });
 
-app.post("/demosql", (req, res) => {
-    var name = req.body['name'];
-    if (name) {
-        db.none("INSERT INTO DEMO(Text) VALUES ($1)", name).then(() => {
-            // We successfully added the name, let the user know
-            res.send({
-                success:true
-            });
-        }).catch((err) => {
-            // Log the error
-            console.log(err);
-            res.send({
-                success:false, 
-                error:err
-            });           
-        })
-    } else {
-        res.send({
-            success:false, 
-            input:req.body,
-            error:"Mission required information"
-        });
-    }
-});
+// app.post("/demosql", (req, res) => {
+//     var name = req.body['name'];
+//     if (name) {
+//         db.none("INSERT INTO DEMO(Text) VALUES ($1)", name).then(() => {
+//             // We successfully added the name, let the user know
+//             res.send({
+//                 success:true
+//             });
+//         }).catch((err) => {
+//             // Log the error
+//             console.log(err);
+//             res.send({
+//                 success:false, 
+//                 error:err
+//             });           
+//         })
+//     } else {
+//         res.send({
+//             success:false, 
+//             input:req.body,
+//             error:"Mission required information"
+//         });
+//     }
+// });
 
-app.get("/demosql", (req, res) => {
-    db.manyOrNone('SELECT Text FROM Demo').then((data) => {
-        res.send({
-            success:true,
-            names:data
-        });
-    }).catch((err) => {
-        console.log(err);
-        res.send({
-            success:false,
-            error:err
-        })
-    });
-});
+// app.get("/demosql", (req, res) => {
+//     db.manyOrNone('SELECT Text FROM Demo').then((data) => {
+//         res.send({
+//             success:true,
+//             names:data
+//         });
+//     }).catch((err) => {
+//         console.log(err);
+//         res.send({
+//             success:false,
+//             error:err
+//         })
+//     });
+// });
 
 
 /*
