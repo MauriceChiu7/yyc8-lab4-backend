@@ -27,7 +27,20 @@ router.get('/blog/get', (req, res) => {
 })
 
 router.get('/setlists/recent', (req, res) => {
-    // Todo: the assignent part
+    let url = `https://phishnet.api-docs.io/v3/setlists/get-recent-setlists?apikey=${API_KEY}`;
+
+    let n = req.originalUrl.indexOf('?') + 1;
+    if (n > 0) {
+        url += '&' + req.originalUrl.substring(n);
+    }
+
+    request(url, function(error, response, body)) {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(body);
+        }
+    }
 })
 
 module.exports = router;
