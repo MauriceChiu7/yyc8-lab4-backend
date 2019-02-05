@@ -27,7 +27,7 @@ router.get('/blog/get', (req, res) => {
 })
 
 router.get('/setlists/recent', (req, res) => {
-    let url = `https://api.phish.net/v3/setlists/get-recent-setlists?apikey=${API_KEY}`;
+    let url = `https://api.phish.net/v3/setlists/recent?apikey=${API_KEY}`;
 
     let n = req.originalUrl.indexOf('?') + 1;
     if (n > 0) {
