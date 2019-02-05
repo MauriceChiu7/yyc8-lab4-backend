@@ -34,13 +34,13 @@ router.get('/setlists/recent', (req, res) => {
         url += '&' + req.originalUrl.substring(n);
     }
 
-    request(url, function(error, response, body)) {
+    request(url, function(error, response, body) {
         if (error) {
             res.send(error);
         } else {
             res.send(body);
         }
-    }
+    })
 })
 
 module.exports = router;
