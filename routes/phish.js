@@ -21,7 +21,7 @@ router.get('/blog/get', (req, res) => {
             // Pass on everything (try out each of these in Postman to see the difference)
             // res.send(error);
             // res.send(response);
-            res.sen(body);
+            res.send(body);
         }
     })
 })
