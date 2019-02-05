@@ -14,6 +14,7 @@ app.use('/params', require('./routes/params.js'));
 app.use('/wait', require('./routes/wait.js'));
 app.use('/demosql', require('./routes/demosql.js'));
 app.use('/register', require('./routes/register.js'));
+app.use('/login', require('./routes/login.js'));
 
 /**
  * Hello World functions below
