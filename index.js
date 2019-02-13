@@ -16,6 +16,7 @@ app.use('/demosql', require('./routes/demosql.js'));
 app.use('/register', require('./routes/register.js'));
 app.use('/login', require('./routes/login.js'));
 app.use('/phish', middleware.checkToken, require('./routes/phish.js'));
+app.use('/pushy', middleware.checkToken, require('./routes/pushy.js'));
 
 /**
  * Hello World functions below
