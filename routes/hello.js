@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
 
 // Add a post route to the router
 router.post("/", (req, res) => {
+    require('../utilities/util.js').messaging.sendToTopic("all", "testing topic all", "Testing");
     res.send({
         message:"Hello, you sent a POST request"
     })
